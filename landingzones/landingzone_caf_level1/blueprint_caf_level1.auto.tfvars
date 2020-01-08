@@ -71,4 +71,4 @@ solution_plan_map = {
 
     }
 }
-log_analytics_workspace = ""
+

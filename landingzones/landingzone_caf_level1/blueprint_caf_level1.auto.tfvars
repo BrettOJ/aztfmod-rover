@@ -1,7 +1,7 @@
 #Cloud Adoption Framework Landing Zone level 1
 
 # Set of resource groupds to land the blueprint
-resource_group_hub = {
+resource_groups_hub = {
     HUB-CORE-VNET    = {
         name = "-hub-core-vnet"
         location = "southeastasia"

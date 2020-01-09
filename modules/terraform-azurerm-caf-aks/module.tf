@@ -12,10 +12,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
   dns_prefix          = "aks-${var.app_name}-${var.env}-${local.random}"
   resource_group_name = var.resource_group_name
   location            = var.location
-  node_resource_group = var.aks_node_rg
+  node_resource_group = var.node_resource_group
 
   linux_profile {
-    admin_username = var.linux_admin_username
+    admin_username = var.admin_username
 
     ssh_key {
       key_data = "${trimspace(tls_private_key.key.public_key_openssh)}"

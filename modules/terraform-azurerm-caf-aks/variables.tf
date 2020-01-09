@@ -12,7 +12,7 @@ variable "app_name" {}
 
 variable "env" {}
 
-variable "aks_node_rg" {
+variable "node_resource_group" {
   description = "(Optional) The name of the Resource Group where the the Kubernetes Nodes should exist."
   type        = "string"
 
@@ -50,7 +50,7 @@ variable "agent_pools" {
   }]
 }
 
-variable "linux_admin_username" {
+variable "admin_username" {
   description = "(Optional) User name for authentication to the Kubernetes linux agent virtual machines in the cluster."
   type        = "string"
   default     = "azureuser"

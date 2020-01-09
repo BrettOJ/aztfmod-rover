@@ -27,6 +27,6 @@ module "azurerm_kubernetes_cluster" {
       dns_prefix          = "aks-${var.app_name}-${var.env}-${local.random}"
       resource_group_name = var.resource_group_name
       location            = var.location
-      node_resource_group = var.aks_node_rg
-      admin_username      = var.linux_admin_username
+      node_resource_group = var.node_resource_group
+      admin_username      = var.admin_username 
 }

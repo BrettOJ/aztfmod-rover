@@ -19,5 +19,6 @@ data "terraform_remote_state" "landingzone_caf_level1" {
 }
 
 locals {
-    prefix          = data.terraform_remote_state.landingzone_caf_level1.outputs.prefix
+    prefix                        = data.terraform_remote_state.landingzone_caf_level1.outputs.prefix
+    log_analytics_workspace_id    = data.terraform_remote_state.landingzone_caf_level1.outputs.log_analytics_workspace.id 
 }

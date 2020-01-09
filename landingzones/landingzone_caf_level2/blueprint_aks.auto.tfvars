@@ -23,4 +23,4 @@ tags = {
     DR              = "NON-DR-ENABLED"
 }
 
-
+ log_analytics_workspace_id = local.log_analytics_workspace_id

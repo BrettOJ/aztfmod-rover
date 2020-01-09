@@ -1,26 +1,17 @@
-output "blueprint_foundations" {
+
+output "blueprint_vnet_hub" {
   sensitive   = true                      # to hide content from logs
-  value       = module.blueprint_foundations
+  value       = module.blueprint_vnet_hub
 }
 
-output "blueprint_operations" {
+output "blueprint_vnet_mgmt" {
   sensitive   = true                      # to hide content from logs
-  value       = module.blueprint_operations
+  value       = module.blueprint_vnet_mgmt
 }
 
-output "blueprint_networking_shared_transit" {
+output "blueprint_vnet_egress" {
   sensitive   = true                      # to hide content from logs
-  value       = module.blueprint_networking_shared_transit
-}
-
-output "blueprint_networking_shared_services" {
-  sensitive   = true                      # to hide content from logs
-  value       = module.blueprint_networking_shared_services
-}
-
-output "blueprint_networking_shared_egress" {
-  sensitive   = true                      # to hide content from logs
-  value       = module.blueprint_networking_shared_egress
+  value       = module.blueprint_vnet_egress
 }
 
 output "prefix" {

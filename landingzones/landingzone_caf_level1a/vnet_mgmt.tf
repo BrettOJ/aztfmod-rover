@@ -1,11 +1,11 @@
-module "blueprint_networking_shared_services" {
-    source = "./blueprint_networking_shared_services"
+module "blueprint_vnet_mgmt" {
+    source = "../../blueprints/blueprint_vnet_mgmt"
   
-    prefix                              = module.blueprint_foundations.prefix
+    prefix                              = local.prefix
     location                            = var.location_map["region1"]
-    log_analytics_workspace             = module.blueprint_foundations.log_analytics_workspace
-    diagnostics_map                     = module.blueprint_foundations.diagnostics_map
-    tags                                = module.blueprint_foundations.tags
+    log_analytics_workspace             = local.log_analytics_workspace
+    diagnostics_map                     = local.diagnostics_map
+    tags                                = local.tags
     
     virtual_network_rg                  = var.resource_groups_shared_services["HUB-CORE-NET"]
     resource_groups_shared_services     = var.resource_groups_shared_services

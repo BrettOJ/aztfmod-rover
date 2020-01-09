@@ -7,6 +7,23 @@ resource_groups_shared_services = {
     }
 }
 
+
+#Primary location picked is region1, region2 is picked as backup whenever applicable
+location_map = {
+    region1   = "southeastasia"
+}
+
+#Set of tags for core operations: includes core resources for hub
+tags = {
+    environment     = "DEV"
+    owner           = "Avanade"
+    deploymentType  = "Terraform"
+    costCenter      = "1664"
+    BusinessUnit    = "SHARED"
+    DR              = "NON-DR-ENABLED"
+}
+
+
 enable_ddos_standard = false
 ddos_name            = "ddos_protection_plan"
 

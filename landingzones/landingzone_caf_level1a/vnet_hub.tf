@@ -1,12 +1,12 @@
-module "blueprint_networking_shared_transit" {
-    source = "./blueprint_networking_shared_transit"
+module "blueprint_vnet_hub" {
+    source = "../../blueprints/blueprint_vnet_hub"
   
-    prefix                              = module.blueprint_foundations.prefix
-    log_analytics_workspace             = module.blueprint_foundations.log_analytics_workspace
-    diagnostics_map                     = module.blueprint_foundations.diagnostics_map
-    tags                                = module.blueprint_foundations.tags
-
+    prefix                              = local.prefix
     location                            = var.location_map["region1"]
+    log_analytics_workspace             = local.log_analytics_workspace
+    diagnostics_map                     = local.diagnostics_map
+    tags                                = local.tags
+
     ip_addr_config                      = var.public_ip_addr
     remote_network                      = var.remote_network
     connection_name                     = var.connection_name
@@ -18,8 +18,8 @@ module "blueprint_networking_shared_transit" {
     provision_gateway                   = var.provision_gateway
     
 
-    shared_services_vnet_object         = module.blueprint_networking_shared_services.shared_services_vnet_object
-    virtual_network_rg                  = module.blueprint_networking_shared_services.resource_group_shared_services
+    shared_services_vnet_object         = module.blueprint_vnet_mgmt.shared_services_vnet_object
+    virtual_network_rg                  = module.blueprint_vnet_mgmt.resource_group_shared_services
 
     akv_config                          = var.akv_config
 }

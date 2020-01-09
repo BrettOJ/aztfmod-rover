@@ -7,7 +7,20 @@ resource_groups_shared_transit = {
         location = "southeastasia"  
     }
 }
+#Primary location picked is region1, region2 is picked as backup whenever applicable
+location_map = {
+    region1   = "southeastasia"
+}
 
+#Set of tags for core operations: includes core resources for hub
+tags = {
+    environment     = "DEV"
+    owner           = "Avanade"
+    deploymentType  = "Terraform"
+    costCenter      = "1664"
+    BusinessUnit    = "SHARED"
+    DR              = "NON-DR-ENABLED"
+}
 # Settings for the shared services egress vnet
 networking_transit = {
         vnet = {

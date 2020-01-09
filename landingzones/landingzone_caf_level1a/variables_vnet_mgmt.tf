@@ -23,3 +23,9 @@ variable "bastion_config" {
 variable "enable_bastion" {
   description = "Switch to enable Azure Bastion // reserved for future use"
 }
+variable "location_map" {
+
+}
+variable "tags" {
+
+}

@@ -19,5 +19,5 @@ output "prefix" {
 }
 
 output "tags" {
-  value = var.tags_hub
+  value = var.tags
 }

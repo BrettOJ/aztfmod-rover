@@ -4,7 +4,7 @@ module "caf_name_aks" {
   name    = var.name
   type    = "aks"
   convention  = var.convention
-}
+} 
 
 
 resource "azurerm_kubernetes_cluster" "aks" {

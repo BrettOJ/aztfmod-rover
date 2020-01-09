@@ -8,7 +8,7 @@ terraform {
     }
 }
 
-data "terraform_remote_state" "level0_launchpad" {
+data "terraform_remote_state" "landingzone_caf_level1" {
   backend = "azurerm"
   config = {
     storage_account_name  = var.lowerlevel_storage_account_name
@@ -19,5 +19,5 @@ data "terraform_remote_state" "level0_launchpad" {
 }
 
 locals {
-    prefix          = data.terraform_remote_state.level0_launchpad.outputs.prefix
+    prefix          = data.terraform_remote_state.landingzone_caf_level1.outputs.prefix
 }

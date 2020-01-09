@@ -13,14 +13,14 @@ module "resource_group" {
   version = "0.1.1"
 
   prefix          = var.prefix
-  resource_groups = var.resource_groups_shared_services
+  resource_groups = var.resource_groups
   tags            = local.tags
 }
 
 
 module "azurerm_kubernetes_cluster" {
     
-    source = ""
+    source = "../../modules/terraform-azurerm-caf-aks"
     #source  = "aztfmod/caf-kubernetes-cluster/azurerm"
     #version = "0.1.0"
   
@@ -28,5 +28,5 @@ module "azurerm_kubernetes_cluster" {
       resource_group_name = var.resource_group_name
       location            = var.location
       node_resource_group = var.aks_node_rg
-      admin_username = var.linux_admin_username
+      admin_username      = var.linux_admin_username
 }

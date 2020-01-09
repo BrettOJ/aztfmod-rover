@@ -10,9 +10,8 @@ provider "azuread" {
     version = "<=0.6.0"
 }
 
-terraform {
-    backend "azurerm" {
-    }
+
+data "azurerm_subscription" "current" {
 }
 
 locals {

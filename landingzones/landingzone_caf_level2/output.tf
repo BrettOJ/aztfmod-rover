@@ -1,8 +1,4 @@
-output "blueprint_foundations" {
-  sensitive   = true                      # to hide content from logs
-  value       = module.blueprint_foundations
-  description = "Full output of the foundations blueprint."
-}
+
 
 output "prefix" {
   value = local.prefix

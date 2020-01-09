@@ -19,5 +19,6 @@ locals {
   blueprint_tag          = {
     "blueprint" = basename(abspath(path.module))
   }
-  tags                = merge(var.tags_hub,local.blueprint_tag)
+  tags                = merge(var.tags,local.blueprint_tag)
+  HUB-CORE-VNET = lookup(module.resource_group.names, "HUB-CORE-VNET", null)
 }

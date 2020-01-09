@@ -1,7 +1,7 @@
 #Cloud Adoption Framework Landing Zone level 1
 
 # Set of resource groupds to land the blueprint
-resource_groups_hub = {
+resource_groups = {
     HUB-CORE-VNET    = {
         name = "-hub-core-vnet"
         location = "southeastasia"
@@ -15,7 +15,7 @@ location_map = {
 }
 
 #Set of tags for core operations: includes core resources for hub
-tags_hub = {
+tags = {
     environment     = "DEV"
     owner           = "Avanade"
     deploymentType  = "Terraform"
@@ -26,22 +26,22 @@ tags_hub = {
 
 main_vnet = {
         vnet = {
-            name                = "sg1-vnet-dmz"
-            address_space       = ["10.101.4.0/22"]     # 10.100.4.0 - 10.100.7.255
-            dns                 = ["192.168.0.16", "192.168.0.64"]
-            enable_ddos_std     = true
-            ddos_id             = "/subscriptions/00000000-0000-0000-0000-0000000000000/resourceGroups/testrg/providers/Microsoft.Network/ddosProtectionPlans/myddos"
-
+            name                = "_Shared_Services"
+            address_space       = ["10.101.4.0/22"]
+            dns                 = []
         }
         specialsubnets     = {
-                AzureFirewallSubnet = {
-                name                = "AzureFirewallSubnet"
-                cidr                = "10.101.4.0/25"
-               }
-            }
+                            }
         subnets = {
-            Subnet_1        = {
-                name                = "Active_Directory"
+            subnet0                 = {
+                name                = "Critical_Applications"
+                cidr                = "10.101.4.0/25"
+                service_endpoints   = []
+                nsg_inbound         = []
+                nsg_outbound        = []
+            }
+            subnet1                 = {
+                name                = "Active_Dir"
                 cidr                = "10.101.4.128/27"
                 service_endpoints   = []
                 nsg_inbound         = [
@@ -50,25 +50,48 @@ main_vnet = {
                     ["RPC-EPM", "102", "Inbound", "Allow", "tcp", "*", "135", "*", "*"],
                     ["SMB-In", "103", "Inbound", "Allow", "tcp", "*", "445", "*", "*"],
                 ]
-                nsg_outbound        = []
-                delegation          = {
-                    name = "acctestdelegation1" 
-                    service_delegation = {
-                    name    = "Microsoft.ContainerInstance/containerGroups"
-                    actions = ["Microsoft.Network/virtualNetworks/subnets/join/action", "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"]
-                    }
-                }
+                nsg_outbound        = [
+                    ["o-LDAP-t", "100", "Outbound", "Allow", "*", "*", "389", "*", "*"],
+                    ["o-SMB-In", "103", "Outbound", "Allow", "tcp", "*", "445", "*", "*"],
+                ]
             }
-
+            subnet2                 = {
+                name                = "SQL_Servers"
+                cidr                = "10.101.4.160/27"
+                service_endpoints   = []
+                nsg_inbound         = [
+                    # {"Name", "Priority", "Direction", "Action", "Protocol", "source_port_range", "destination_port_range", "source_address_prefix", "destination_address_prefix" }, 
+                    ["TDS-In", "100", "Inbound", "Allow", "tcp", "*", "1433", "*", "*"],
+                ]
+                nsg_outbound        = []
+            }
+            subnet4                 = {
+                name                = "AzureBastionSubnet"
+                cidr                = "10.101.4.192/27"
+                service_endpoints   = []
+                nsg_inbound         = [
+                    ["bastion-in-allow", "100", "Inbound", "Allow", "tcp", "*", "443", "*", "*"],
+                    ["bastion-control-in-allow-443", "120", "Inbound", "Allow", "tcp", "*", "443", "GatewayManager", "*"],
+                    ["bastion-control-in-allow-4443", "121", "Inbound", "Allow", "tcp", "*", "4443", "GatewayManager", "*"],
+                ]
+                nsg_outbound        = [
+                    ["bastion-vnet-out-allow-22", "100", "Outbound", "Allow", "tcp", "*", "22", "*", "VirtualNetwork"],
+                    ["bastion-vnet-out-allow-3389", "101", "Outbound", "Allow", "tcp", "*", "3389", "*", "VirtualNetwork"],
+                    ["bastion-azure-out-allow", "120", "Outbound", "Allow", "tcp", "*", "443", "*", "AzureCloud"],
+                ]
+            }
+        }
+        diagnostics = {
+        log = [
+                    # ["Category name",  "Diagnostics Enabled(true/false)", "Retention Enabled(true/false)", Retention_period] 
+                    ["VMProtectionAlerts", true, true, 60],
+            ]
+        metric = [
+                    #["Category name",  "Diagnostics Enabled(true/false)", "Retention Enabled(true/false)", Retention_period]                 
+                    ["AllMetrics", true, true, 60],
+            ]   
         }
 }
 
-##Log analytics solutions to be deployed 
-solution_plan_map = {
-    NetworkMonitoring = {
-        "publisher" = "Microsoft"
-        "product"   = "OMSGallery/NetworkMonitoring"
 
-    }
-}
 

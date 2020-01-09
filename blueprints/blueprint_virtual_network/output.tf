@@ -5,7 +5,7 @@ output "location" {
 }
 
 output "tags" {
-  value = var.tags_hub
+  value = var.tags
   description = "exports the tags created in this blueprint"
 }
 

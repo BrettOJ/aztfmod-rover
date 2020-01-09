@@ -1,4 +1,4 @@
-variable "resource_groups_hub" {
+variable "resource_groups" {
   description = "(Required) Contains the resource groups object to be created for vdc_level1"
 }
 
@@ -8,7 +8,7 @@ variable "location_map" {
   type        = map(string)
 }
 
-variable "tags_hub" {
+variable "tags" {
   description = "(Required) Map of the tags to be applied"
   type    = map(string)
 }
@@ -21,7 +21,9 @@ variable "enable_network_watcher" {
   description = "Enable network watcher for the subnet - this will deploy and configure a Linux VM with network watcher extensions."
   default = false
 }
+variable "main_vnet" {
 
+}
 
 
 
